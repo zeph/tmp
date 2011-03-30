@@ -21,4 +21,5 @@ print (src_filename, dst_prefix)
 f = open(src_filename, 'r')
 for raw_filename in f:
    filename = raw_filename.strip()
-   print (filename, time.ctime(os.path.getmtime(filename)).strptime("%y-%m-%d"))
+   mtime = time.ctime(os.path.getmtime(filename))
+   print (filename, mtime)
