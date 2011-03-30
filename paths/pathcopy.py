@@ -19,7 +19,12 @@ for arg in sys.argv:
 print (src_filename, dst_prefix)
 
 f = open(src_filename, 'r')
-for raw_filename in f:
-   filename = raw_filename.strip()
-   mtime = localtime(os.path.getmtime(filename))
-   print (filename, mtime.strftime("%Y-%M-%D"))
+for filename_raw in f:
+   filename_path = filename_raw.strip()
+   mtime = time.localtime(os.path.getmtime(filename_path))
+   mtime_p = time.strftime("%Y-%m-%d", mtime)
+   print (filename_path, mtime_p)
+   filename = os.path.basename(filename_path)
+   filename_dst = os.path.join( dst_prefix , mtime_p , filename )
+   print filename_dst
+   #if not os.path.exists(filename_dst):
