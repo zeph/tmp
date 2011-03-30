@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 import os.path, time
+import shutil
 
 i = 0
 src_filename = ''
@@ -27,4 +28,7 @@ for filename_raw in f:
    filename = os.path.basename(filename_path)
    filename_dst = os.path.join( dst_prefix , mtime_p , filename )
    print filename_dst
-   #if not os.path.exists(filename_dst):
+   intermediate = os.path.dirname(filename_dst)
+   if not os.path.exists(intermediate):
+        os.makedirs(intermediate)
+   shutil.copyfile(filename_path, filename_dst)
