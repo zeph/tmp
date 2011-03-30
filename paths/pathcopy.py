@@ -21,5 +21,5 @@ print (src_filename, dst_prefix)
 f = open(src_filename, 'r')
 for raw_filename in f:
    filename = raw_filename.strip()
-   mtime = time.ctime(os.path.getmtime(filename))
-   print (filename, mtime)
+   mtime = localtime(os.path.getmtime(filename))
+   print (filename, mtime.strftime("%Y-%M-%D"))
