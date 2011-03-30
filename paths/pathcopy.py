@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys
+import os.path, time
 
 i = 0
 src_filename = ''
@@ -18,5 +19,6 @@ for arg in sys.argv:
 print (src_filename, dst_prefix)
 
 f = open(src_filename, 'r')
-for filename in f:
-   print filename.strip()
+for raw_filename in f:
+   filename = raw_filename.strip()
+   print (filename, time.ctime(os.path.getmtime(filename)))
