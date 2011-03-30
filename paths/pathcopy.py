@@ -15,5 +15,8 @@ for arg in sys.argv:
        dst_prefix = sys.argv[i+1]
     i = i+1
 
-print src_filename
-print dst_prefix
+print (src_filename, dst_prefix)
+
+f = open(src_filename, 'r')
+for filename in f:
+   print filename.strip()
