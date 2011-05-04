@@ -12,7 +12,7 @@ while next:
         url = urlopen( next )
         data = loads( url.read() )
         for msg in data[ 'data' ]:
-                print msg[ 'updated_time' ], msg[ 'message' ]
+                print msg[ 'updated_time' ], msg[ 'message' ].encode('utf-8')
         try:
                 next = data[ 'paging' ][ 'next' ]
         except KeyError:
