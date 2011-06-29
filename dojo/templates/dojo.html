@@ -2,16 +2,73 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Tutorial: Hello Dojo!</title>
+    <title>Dojo Grid!</title>
     <!-- load Dojo -->
-    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js"></script>
-    <script>
-        dojo.ready(function(){
-            dojo.byId("greeting").innerHTML += ", from " + dojo.version;
-        });
-    </script>
+    <script src="static/dojo/dojo.js"></script>
 </head>
 <body>
-    <h1 id="greeting">Hello</h1>
+    <style type="text/css">
+        @import "static/dijit/themes/claro/claro.css";
+        @import "static/dojox/grid/resources/claroGrid.css";
+    </style>
+    <div id="grid1" dojoType="dojox.grid.EnhancedGrid" query="{ Track: '*' }" rowsPerPage="30"
+        plugins='{nestedSorting: true, dnd: true, indirectSelection: true, menus:{headerMenu:"headerMenu", rowMenu:"rowMenu", cellMenu:"cellMenu", selectedRegionMenu:"selectedRegionMenu"}}'
+        store="csvStore1" structure="layout" rowSelector="20px">
+        <div dojoType="dijit.Menu" id="headerMenu" style="display: none;">
+            <div dojoType="dijit.MenuItem">Header Menu Item 1</div>
+            <div dojoType="dijit.MenuItem">Header Menu Item 2</div>
+            <div dojoType="dijit.MenuItem">Header Menu Item 3</div>
+            <div dojoType="dijit.MenuItem">Header Menu Item 4</div>
+        </div>
+        <div dojoType="dijit.Menu" id="rowMenu" style="display: none;">
+            <div dojoType="dijit.MenuItem">Row Menu Item 1</div>
+            <div dojoType="dijit.MenuItem">Row Menu Item 2</div>
+            <div dojoType="dijit.MenuItem">Row Menu Item 3</div>
+            <div dojoType="dijit.MenuItem">Row Menu Item 4</div>
+        </div>
+        <div dojoType="dijit.Menu" id="cellMenu" style="display: none;">
+            <div dojoType="dijit.MenuItem">Cell Menu Item 1</div>
+            <div dojoType="dijit.MenuItem">Cell Menu Item 2</div>
+            <div dojoType="dijit.MenuItem">Cell Menu Item 3</div>
+            <div dojoType="dijit.MenuItem">Cell Menu Item 4</div>
+        </div>
+        <div dojoType="dijit.Menu" id="selectedRegionMenu" style="display: none;">
+            <div dojoType="dijit.MenuItem">Action 1 for Selected Region</div>
+            <div dojoType="dijit.MenuItem">Action 2 for Selected Region</div>
+            <div dojoType="dijit.MenuItem">Action 3 for Selected Region</div>
+            <div dojoType="dijit.MenuItem">Action 4 for Selected Region</div>
+        </div>
+    </div>
+    <script>
+        //requires
+        dojo.require('dojox.grid.EnhancedGrid');
+        dojo.require('dojox.grid.enhanced.plugins.DnD');
+        dojo.require('dojox.grid.enhanced.plugins.Menu');
+        dojo.require('dojox.grid.enhanced.plugins.NestedSorting');
+        dojo.require('dojox.grid.enhanced.plugins.IndirectSelection');
+        dojo.require('dojox.data.CsvStore');
+        dojo.require('dijit.form.Button');
+        dojo.require('dojo.parser');
+
+        //when resources are loaded
+        dojo.ready(function() {
+            //layout
+            layout = [{
+                defaultCell: { width: 8, editable: false, type: dojox.grid.cells._Widget },
+                rows:
+                [
+                    { field: 'Genre', width: '10' },
+                    { field: 'Artist', width: '15' },
+                    { field: 'Year', width: '6' },
+                    { field: 'Album', width: '28' },
+                    { field: 'Name', width: '22' }
+                ]}
+            ];
+            //get data store
+            csvStore1 = new dojox.data.CsvStore({ id:'csvStore1', url:'static/grid-demo-data.csv' });
+            //parse!
+            dojo.parser.parse();
+        });
+    </script>
 </body>
 </html>
